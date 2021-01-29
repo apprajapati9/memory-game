@@ -23,7 +23,8 @@
             android:layout_gravity="center"
             android:contentDescription="Memory Image"
             android:scaleType="fitXY"
-            android:background="@drawable/ic_launcher_background"
+
+            android:src="@drawable/ic_launcher_background"
             />
 
         <!--  @null on background will remove any button's shadow

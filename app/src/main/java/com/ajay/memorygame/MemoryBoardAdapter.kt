@@ -8,20 +8,29 @@ import android.widget.ImageButton
 import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import com.ajay.memorygame.models.BoardSize
+import com.ajay.memorygame.models.MemoryCard
 import kotlin.math.min
 
-class MemoryBoardAdapter(private val context: Context, private val numPieces: Int) :
+class MemoryBoardAdapter(private val context: Context,
+                         private val numPieces: BoardSize,
+                         private val images: List<MemoryCard>,
+                        private val cardClickListener: CardClickListener) :
     RecyclerView.Adapter<MemoryBoardAdapter.AdapterHolder>() {
 
     companion object{
         private const val MARGIN_SIZE = 10
     }
 
+    interface CardClickListener{
+        fun onCardClickListener(position: Int)
+    }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdapterHolder {
 
-        val cardWidth = parent.width /2 - (2* MARGIN_SIZE)
-        val cardHeight = parent.height / (numPieces/2) - (2* MARGIN_SIZE)
+        val cardWidth = parent.width / numPieces.getWidth() - (2* MARGIN_SIZE)
+        val cardHeight = parent.height / numPieces.getHeigh() - (2* MARGIN_SIZE)
 
         val cardSideLength = min(cardWidth, cardHeight)
         val view = LayoutInflater.from(context).inflate(R.layout.memory_card, parent, false)
@@ -38,15 +47,18 @@ class MemoryBoardAdapter(private val context: Context, private val numPieces: In
         holder.bind(position)
     }
 
-    override fun getItemCount() = numPieces
+    override fun getItemCount() = numPieces.numOfCards
 
     inner class AdapterHolder(itemView: View): RecyclerView.ViewHolder(itemView){
 
         private val imageButton = itemView.findViewById<ImageButton>(R.id.imageButton)
 
         fun bind(position: Int) {
+            imageButton.setImageResource(
+                    if(images.get(position).isFaceUp)
+                        images.get(position).identifier else R.drawable.ic_launcher_background)
             imageButton.setOnClickListener{
-                Toast.makeText(context, "Clicked position:" + position, Toast.LENGTH_SHORT).show()
+                cardClickListener.onCardClickListener(position)
             }
         }
 
