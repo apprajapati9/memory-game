@@ -1,10 +1,12 @@
 package com.ajay.memorygame
 
+import android.animation.ArgbEvaluator
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ajay.memorygame.models.BoardSize
@@ -41,6 +43,10 @@ class MainActivity : AppCompatActivity() {
         textViewNumMoves = findViewById(R.id.tvNumMoves)
         textViewNumPairs = findViewById(R.id.tvNumPairs)
 
+        textViewNumPairs.setTextColor(ContextCompat.getColor(this,R.color.color_progress_none))
+        textViewNumMoves.setText("Moves: ${memoryGame.getMoves()}")
+        textViewNumPairs.setText("Pairs: ${memoryGame.numPairsfound} / ${boardSize.getNumPairs()}")
+
         adapter = MemoryBoardAdapter(this, boardSize, memoryGame.cards,
                 object: MemoryBoardAdapter.CardClickListener{
                     override fun onCardClickListener(position: Int) {
@@ -66,7 +72,16 @@ class MainActivity : AppCompatActivity() {
             return
         }
 
-        memoryGame.flipCard(position)
+        if(memoryGame.flipCard(position)){
+            val color = ArgbEvaluator().evaluate(memoryGame.numPairsfound.toFloat()/boardSize.getNumPairs(),
+            ContextCompat.getColor(this, R.color.color_progress_none),
+            ContextCompat.getColor(this, R.color.color_progress_full)) as Int
+
+            textViewNumPairs.setTextColor(color)
+            textViewNumPairs.text = "Pairs: ${memoryGame.numPairsfound} / ${boardSize.getNumPairs()}"
+        }
+
+        textViewNumMoves.text = "Moves: ${memoryGame.getMoves()}"
         adapter.notifyDataSetChanged()
     }
 }

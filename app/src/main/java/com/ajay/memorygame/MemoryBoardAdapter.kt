@@ -63,7 +63,7 @@ class MemoryBoardAdapter(private val context: Context,
 
             imageButton.alpha = if (myCard.isMatched) .4f else 1.0f
 
-            val colorStateList = if(myCard.isMatched) ContextCompat.getColorStateList(context, R.color.red_crimson) else null
+            val colorStateList = if(myCard.isMatched) ContextCompat.getColorStateList(context, R.color.color_transparent) else null
             ViewCompat.setBackgroundTintList(imageButton, colorStateList)
 
             imageButton.setOnClickListener{
