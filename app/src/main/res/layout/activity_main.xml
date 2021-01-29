@@ -54,11 +54,16 @@
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="0dp"
         android:id="@+id/rcMoves"
+        android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:overScrollMode="never"
         app:layout_constraintBottom_toTopOf="@+id/linearGameContainer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    <!--  android:overScrollMode="never" since we have fixed size of recyclerview, there's no need ripple effect indicator
+        for end of recyclerview item, so setting never will disable ripple effect when trying to scroll down   -->
 </androidx.constraintlayout.widget.ConstraintLayout>

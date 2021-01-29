@@ -3,6 +3,7 @@ package com.ajay.memorygame
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class MainActivity : AppCompatActivity() {
@@ -18,5 +19,9 @@ class MainActivity : AppCompatActivity() {
         recyclerViewBoard = findViewById(R.id.rcMoves)
         textViewNumMoves = findViewById(R.id.tvNumMoves)
         textViewNumPairs = findViewById(R.id.tvNumPairs)
+
+        recyclerViewBoard.adapter = MemoryBoardAdapter(this, 8);
+        recyclerViewBoard.setHasFixedSize(true)
+        recyclerViewBoard.layoutManager = GridLayoutManager(this, 2 )
     }
 }
