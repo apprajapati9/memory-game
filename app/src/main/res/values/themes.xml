@@ -26,4 +26,8 @@
     <style name="Theme.MemoryGame.cardView">
         <item name="cardBackgroundColor">@color/white</item>
     </style>
+
+    <style name="Theme.MemoryGame.ImageButtonBackground">
+        <item name="android:background">@color/white</item>
+    </style>
 </resources>

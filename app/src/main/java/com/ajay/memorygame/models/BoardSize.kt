@@ -4,7 +4,8 @@ enum class BoardSize(val numOfCards: Int) {
 
     EASY(8),
     MEDIUM(18),
-    HARD(24);
+    HARD(24),
+    VERY_HARD(32);
 
 //    fun getValueOfEnum():Int{
 //        return
@@ -15,6 +16,7 @@ enum class BoardSize(val numOfCards: Int) {
             EASY -> 2
             MEDIUM -> 3
             HARD -> 4
+            VERY_HARD -> 4
         }
     }
 

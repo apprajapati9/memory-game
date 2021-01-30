@@ -1,6 +1,7 @@
 package com.ajay.memorygame
 
 import android.content.Context
+import android.content.res.Configuration
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -49,11 +50,27 @@ class MemoryBoardAdapter(private val context: Context,
         holder.bind(position)
     }
 
+    private fun isUsingNightModeResources(): Boolean {
+        return when (context.resources.configuration.uiMode and
+                Configuration.UI_MODE_NIGHT_MASK) {
+            Configuration.UI_MODE_NIGHT_YES -> true
+            Configuration.UI_MODE_NIGHT_NO -> false
+            Configuration.UI_MODE_NIGHT_UNDEFINED -> false
+            else -> false
+        }
+    }
+
     override fun getItemCount() = numPieces.numOfCards
 
     inner class AdapterHolder(itemView: View): RecyclerView.ViewHolder(itemView){
 
         private val imageButton = itemView.findViewById<ImageButton>(R.id.imageButton)
+
+//        init {
+//            if(isUsingNightModeResources()){
+//                imageButton.background = null
+//            }
+//        }
 
         fun bind(position: Int) {
             val myCard  = images.get(position)
@@ -61,10 +78,12 @@ class MemoryBoardAdapter(private val context: Context,
                     if(myCard.isFaceUp)
                         myCard.identifier else R.drawable.ic_launcher_background)
 
-            imageButton.alpha = if (myCard.isMatched) .4f else 1.0f
+             imageButton.alpha = if (myCard.isMatched) .7f else 1.0f
 
             val colorStateList = if(myCard.isMatched) ContextCompat.getColorStateList(context, R.color.color_transparent) else null
             ViewCompat.setBackgroundTintList(imageButton, colorStateList)
+
+            //if(myCard.isMatched) imageButton.setBackground(null)
 
             imageButton.setOnClickListener{
                 cardClickListener.onCardClickListener(position)
