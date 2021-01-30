@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/mi_refresh"
+        android:icon="@drawable/ic_refresh"
+        app:showAsAction="always"
+        android:title="Refresh" />
+
+    <item
+        android:id="@+id/mi_easy"
+        app:showAsAction="never"
+        android:title="Easy" />
+
+    <item
+        android:id="@+id/mi_medium"
+        app:showAsAction="never"
+        android:title="Medium" />
+    <item
+        android:id="@+id/mi_hard"
+        app:showAsAction="never"
+        android:title="Hard" />
+    <item
+        android:id="@+id/mi_vHard"
+        app:showAsAction="never"
+        android:title="Very Hard" />
+</menu>

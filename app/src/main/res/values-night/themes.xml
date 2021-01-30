@@ -37,6 +37,9 @@
 
     </style>
 
+    <style name="Theme.MemoryGame.ImageButtonBackground">
+        <item name="android:background">@color/black</item>
+    </style>
 
     <style name="Theme.MemoryGame.cardView" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <item name="cardBackgroundColor">@color/black</item>
